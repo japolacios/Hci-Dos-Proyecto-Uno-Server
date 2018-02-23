@@ -52,7 +52,7 @@ public class Logica implements Observer {
 		com = new Communication();
 		new Thread(com).start();
 		com.addObserver(this);
-		
+		usuarios = new ArrayList<Control>();
 		try {
 			System.out.println(InetAddress.getLocalHost().getHostAddress());
 		} catch (UnknownHostException e) {
@@ -67,6 +67,7 @@ public class Logica implements Observer {
 		rondaDone = false;
 		cargaMes = 6000;
 		actualPidio = false;
+		
 	}
 	
 	public void ejecutar() {
@@ -102,26 +103,34 @@ public class Logica implements Observer {
 			System.out.println("Simulation started!");
 			if (app.key == PApplet.ENTER && !init) {
 				com.sendAll(8);
-				turn = 1;
-				subturn = 0;
+				//turn = 1;
+				//subturn = 0;
 				init = true;
-				usuarios = com.users;
+				cloneList();
 				cambiarTurno();
 			}
 		}
 	}
 	
+	public void cloneList() {
+		
+		if(!usuarios.isEmpty() || usuarios != null) {
+			usuarios = new ArrayList<Control>();	
+		}
+		
+	    for (Control control : com.users) {
+	        usuarios.add(control);
+	    }
+	}
 	
 	//Cambio de mes
 	public void cambioMes() {
 		//Cambio Numero de mes
-		if(rondaDone == true) {
 			if(mes < 12) {
 				mes++;
-				return;
+				
 			} else {
 				mes = 1;
-			}
 		}
 		//Vuelve y le da a los turnos
 		usuarios = com.users;
@@ -176,12 +185,15 @@ public class Logica implements Observer {
 		try {
 			user.send(val);
 			usuarios.remove(randomTurno);
+			System.out.println("Mande el turno al man:" + randomTurno );
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		}else {
+		}
+		if(usuarios.size() <= 0 || usuarios.isEmpty()){
 			//Se acabaron los turnos
+			cloneList();
 			cambioMes();
 		}
 	}
@@ -203,6 +215,8 @@ public class Logica implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		ui.setUsers(com.users);
+		System.out.println("usuariesitos"+ com.users.size());
 		if(arg instanceof Control) {
 			Control usuarioActual = (Control) arg;
 			//Recibe Mensajes de los Clientes
@@ -210,9 +224,11 @@ public class Logica implements Observer {
 			//Recibe Ciudades
 			if(usuarioActual.getCity() != null) {
 				ui.setUsers(com.users);
-			}else {
-				//Recibe Logica de Control
+			}
+				
+			//Recibe Logica de Control
 				if(usuarioActual.getValidation() != null) {
+					System.out.println("Got Validation");
 					Validation tempValidation = usuarioActual.getValidation();
 					if(tempValidation.getType() == 3 && actualPidio == false) {
 						//Pide Energia
@@ -228,7 +244,9 @@ public class Logica implements Observer {
 					if(tempValidation.getType() == 5) {
 						//Termino su turno
 						try {
+							System.out.println(usuarioActual+ " Terminio turno");
 							usuarioActual.send(terminarTurno());
+							cambiarTurno();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -240,7 +258,7 @@ public class Logica implements Observer {
 						com.sendAll(7);
 					}
 				}
-			}
+			
 		}
 	}
 }

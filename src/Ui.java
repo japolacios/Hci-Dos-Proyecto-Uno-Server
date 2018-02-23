@@ -41,25 +41,43 @@ public class Ui{
 		//System.out.println(users.size());
 		app.fill(0);
 		app.textSize(20);
-		for (int i = users.size(); i == 10; i++) {
-			if (i < 5) {
-				app.image(usuarios.get(temporada), app.width / 4, 250 + (i * 150));
-				app.text(users.get(i).getCity().getEnergy(), (app.width / 4+380), (250 + (i * 150)+ 300));
-				app.text(users.get(i).getCity().getHouses(), (app.width / 4+260), (250 + (i * 150)+300));
-				app.text(users.get(i).getCity().getPopulation(), (app.width / 4+525), (250 + (i * 150)+300));
-			} else {
-				// i = 0;
-				app.image(usuarios.get(temporada), (app.width) * 3 / 4, 250 + ((i * 150) - 750));
-				app.text(users.get(i).getCity().getEnergy(), ((app.width) * 3 / 4+380), (250 + (i * 150)+ 300));
-				app.text(users.get(i).getCity().getHouses(), ((app.width) * 3 / 4+260), (250 + (i * 150)+300));
-				app.text(users.get(i).getCity().getPopulation(), ((app.width) * 3 / 4+525), (250 + (i * 150)+300));
+		if (users.size() > 0 && !users.isEmpty()) {
+			//System.out.println("LALA: " + users.size());
+			for (int i = 0; i < users.size(); i++) {
+				//System.out.println(i);
+				if (users.get(i).getCity()!=null) {
+					if (i < 5) {
+						//System.out.println(users.get(i).getCity().getEnergy());
+						//app.image(usuarios.get(temporada), app.width / 4, 250 + (i * 150));
+						app.text(users.get(i).getCity().getEnergy(), (app.width / 4 + 60), (i * 150)+ 300);
+						app.text(users.get(i).getCity().getHouses(), (app.width / 4 - 60), (i * 150)+300);
+						app.text(users.get(i).getCity().getPopulation(), (app.width / 4 + 200), (i * 150)+300);
+					} else {
+						// i = 0;
+						//app.image(usuarios.get(temporada), (app.width) * 3 / 4, 250 + ((i * 150) - 750));
+						app.text(users.get(i).getCity().getEnergy(), ((app.width) * 3 / 4+380), (250 + (i * 150)+ 300));
+						app.text(users.get(i).getCity().getHouses(), ((app.width) * 3 / 4+260), (250 + (i * 150)+300));
+						app.text(users.get(i).getCity().getPopulation(), ((app.width) * 3 / 4+525), (250 + (i * 150)+300));
+					}	
+				}
+		
+				/*
+				app.text(users.get(i).getCity().getEnergy(), 380, 300);
+				app.text(users.get(i).getCity().getHouses(), 260, 300);
+				app.text(users.get(i).getCity().getPopulation(), 525, 300);
+				*/
 			}
-			/*
-			app.text(users.get(i).getCity().getEnergy(), 380, 300);
-			app.text(users.get(i).getCity().getHouses(), 260, 300);
-			app.text(users.get(i).getCity().getPopulation(), 525, 300);
-			*/
 		}
+		for (int i = 0; i < 10; i++) {
+			
+			if (i < 5) {
+			app.image(usuarios.get(temporada), app.width / 4, 250 + (i * 150));}
+			
+			else {
+				app.image(usuarios.get(temporada), (app.width) * 3 / 4, 250 + ((i * 150) - 750));
+			}
+		}
+
 	}
 
 	public void cargarImgTemporadas() {

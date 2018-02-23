@@ -15,10 +15,10 @@ public class Communication extends Observable implements Observer, Runnable {
 	private ServerSocket sS;
 	public ArrayList<Control> users;
 	//private City city;
-	private float energy = 700;
+	/*private float energy = 700;
 	private int population = 10;
 	private int houses = 5;
-	private int capacity = 10;
+	private int capacity = 10;*/
 	
 
 	public Communication() {
@@ -89,7 +89,7 @@ public class Communication extends Observable implements Observer, Runnable {
 		}
 	}
 
-	public float getEnergy() {
+	/*public float getEnergy() {
 		return energy;
 	}
 
@@ -119,6 +119,6 @@ public class Communication extends Observable implements Observer, Runnable {
 
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
-	}
+	}*/
 	
 }
