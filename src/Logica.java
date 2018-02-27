@@ -100,7 +100,6 @@ public class Logica implements Observer {
 
 	public void key() {
 		if (app.keyPressed) {
-			System.out.println("Simulation started!");
 			if (app.key == PApplet.ENTER && !init) {
 				com.sendAll(8);
 				//turn = 1;
@@ -108,6 +107,11 @@ public class Logica implements Observer {
 				init = true;
 				cloneList();
 				cambiarTurno();
+				System.out.println("Simulation started!");
+			}
+			
+			if(app.key == ' ') {
+				System.out.println("ARRAY FALSO: " + usuarios.size() + " - ARRAY REAL: " + com.users.size());
 			}
 		}
 	}
@@ -132,12 +136,10 @@ public class Logica implements Observer {
 			} else {
 				mes = 1;
 		}
-		//Vuelve y le da a los turnos
-		usuarios = com.users;
+			System.out.println("MES ACTUAL: " + mes);
 		//Revisa el cambio de esgtacion
 		cambioEstacion();
 		generarEnergia();
-		cambiarTurno();
 	}
 	
 	//Cambio de estacion
@@ -195,6 +197,11 @@ public class Logica implements Observer {
 			//Se acabaron los turnos
 			cloneList();
 			cambioMes();
+			/*
+			 * Aqui se escribiria el codigo para
+			 * enviar la validacion al ultimo usuario
+			 * mediante usuarios.get(0).send(VALIDACION)
+			 */
 		}
 	}
 	//enviar energia
@@ -251,7 +258,7 @@ public class Logica implements Observer {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						cambiarTurno();
+						//cambiarTurno();
 					}
 					if(tempValidation.getType() == 6) {
 						//Se murio
