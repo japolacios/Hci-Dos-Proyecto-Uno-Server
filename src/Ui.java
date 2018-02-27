@@ -6,7 +6,7 @@ import java.util.Observer;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Ui{
+public class Ui {
 	private ArrayList<PImage> fondos, baterias, headers, usuarios;
 	int temporada = 1;
 	private ArrayList<Control> users;
@@ -39,6 +39,9 @@ public class Ui{
 		app.image(fondos.get(temporada), app.width / 2, app.height / 2);
 		app.image(headers.get(temporada), app.width / 2, 100);
 		//System.out.println(users.size());
+		app.textSize(70);
+		app.text("MES:" + Logica.mes, app.width/2 - 130, 130);
+		app.text("BATERIA: " + Logica.cargaBateria, app.width * 3/4 - 30, 130);
 		app.fill(0);
 		app.textSize(20);
 		if (users.size() > 0 && !users.isEmpty()) {

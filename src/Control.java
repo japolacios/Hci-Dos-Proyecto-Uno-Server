@@ -63,6 +63,7 @@ public class Control extends Observable implements Runnable {
 				validation = (Validation) receive;
 			}
 		}
+		System.out.println(".................."+this);
 		boss.update(this, receive);
 	}
 
@@ -80,5 +81,9 @@ public class Control extends Observable implements Runnable {
 	
 	public Validation getValidation() {
 		return validation;
+	}
+	
+	public void setValidation(Validation vali) {
+		validation = vali;
 	}
 }
