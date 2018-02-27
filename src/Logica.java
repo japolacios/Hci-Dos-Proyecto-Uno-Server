@@ -187,22 +187,13 @@ public class Logica implements Observer {
 		try {
 			user.send(val);
 			usuarios.remove(randomTurno);
-			System.out.println("Mande el turno al man:" + randomTurno );
+			//System.out.println("Mande el turno al man:" + randomTurno );
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		}
-		if(usuarios.size() <= 0 || usuarios.isEmpty()){
-			//Se acabaron los turnos
-			cloneList();
-			cambioMes();
-			/*
-			 * Aqui se escribiria el codigo para
-			 * enviar la validacion al ultimo usuario
-			 * mediante usuarios.get(0).send(VALIDACION)
-			 */
-		}
+
 	}
 	//enviar energia
 	public Validation enviarEnergia(int _energia) {
@@ -250,15 +241,26 @@ public class Logica implements Observer {
 					}
 					if(tempValidation.getType() == 5) {
 						//Termino su turno
+						//cambiarTurno();
 						try {
 							System.out.println(usuarioActual+ " Terminio turno");
 							usuarioActual.send(terminarTurno());
 							cambiarTurno();
+							if(usuarios.size() <= 0 || usuarios.isEmpty()){
+								//Se acabaron los turnos
+								cloneList();
+								cambioMes();
+								
+								/*
+								 * Aqui se escribiria el codigo para
+								 * enviar la validacion al ultimo usuario
+								 * mediante usuarios.get(0).send(VALIDACION)
+								 */
+							}
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						//cambiarTurno();
 					}
 					if(tempValidation.getType() == 6) {
 						//Se murio
