@@ -52,13 +52,13 @@ public class Ui {
 					if (i < 5) {
 						//System.out.println(users.get(i).getCity().getEnergy());
 						//app.image(usuarios.get(temporada), app.width / 4, 250 + (i * 150));
-						app.text(users.get(i).getCity().getEnergy(), (app.width / 4 + 60), (i * 150)+ 300);
+						app.text((int)users.get(i).getCity().getEnergy(), (app.width / 4 + 60), (i * 150)+ 300);
 						app.text(users.get(i).getCity().getHouses(), (app.width / 4 - 60), (i * 150)+300);
 						app.text(users.get(i).getCity().getPopulation(), (app.width / 4 + 200), (i * 150)+300);
 					} else {
 						// i = 0;
 						//app.image(usuarios.get(temporada), (app.width) * 3 / 4, 250 + ((i * 150) - 750));
-						app.text(users.get(i).getCity().getEnergy(), ((app.width) * 3 / 4 + 60), (250 + (i * 150) - 700));
+						app.text((int)users.get(i).getCity().getEnergy(), ((app.width) * 3 / 4 + 60), (250 + (i * 150) - 700));
 						app.text(users.get(i).getCity().getHouses(), ((app.width) * 3 / 4 - 60), (250 + (i * 150) - 700));
 						app.text(users.get(i).getCity().getPopulation(), ((app.width) * 3 / 4 + 200), (250 + (i * 150) - 700));
 					}	
